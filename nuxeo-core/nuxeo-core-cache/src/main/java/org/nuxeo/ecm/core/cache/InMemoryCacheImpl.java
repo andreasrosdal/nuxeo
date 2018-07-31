@@ -47,7 +47,7 @@ public class InMemoryCacheImpl extends AbstractCache {
     public InMemoryCacheImpl(CacheDescriptor desc) {
         super(desc);
         CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder();
-        builder = builder.expireAfterWrite(desc.getTTL(), TimeUnit.MINUTES);
+        builder = builder.expireAfterWrite(desc.ttl.longValue(), TimeUnit.MINUTES);
         Map<String, String> options = desc.options;
         if (options.containsKey(OPTION_CONCURRENCY_LEVEL)) {
             builder = builder.concurrencyLevel(Integer.parseInt(options.get(OPTION_CONCURRENCY_LEVEL)));

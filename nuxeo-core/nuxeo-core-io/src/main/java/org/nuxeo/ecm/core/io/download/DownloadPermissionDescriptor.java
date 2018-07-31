@@ -20,6 +20,7 @@ package org.nuxeo.ecm.core.io.download;
 
 import org.nuxeo.common.xmap.annotation.XNode;
 import org.nuxeo.common.xmap.annotation.XObject;
+import org.nuxeo.runtime.model.Descriptor;
 
 /**
  * Descriptor for the permissions associated to a blob download.
@@ -27,57 +28,35 @@ import org.nuxeo.common.xmap.annotation.XObject;
  * @since 7.4
  */
 @XObject("permission")
-public class DownloadPermissionDescriptor implements Comparable<DownloadPermissionDescriptor> {
+public class DownloadPermissionDescriptor implements Descriptor {
 
     public static final String DEFAULT_SCRIPT_LANGUAGE = "JavaScript";
 
     @XNode("@name")
-    private String name;
+    public String name;
 
     @XNode("script")
-    private String script;
+    public String script;
 
     @XNode("script@language")
-    private String scriptLanguage;
+    public String scriptLanguage = DEFAULT_SCRIPT_LANGUAGE;
 
-    public String getName() {
+    @Override
+    public String getId() {
         return name;
     }
 
-    public String getScript() {
-        return script;
-    }
-
-    public String getScriptLanguage() {
-        return scriptLanguage == null ? DEFAULT_SCRIPT_LANGUAGE : scriptLanguage;
-    }
-
-    // empty constructor
-    public DownloadPermissionDescriptor() {
-    }
-
-    // copy constructor
-    public DownloadPermissionDescriptor(DownloadPermissionDescriptor other) {
-        name = other.name;
-        script = other.script;
-        scriptLanguage = other.scriptLanguage;
-    }
-
-    public void merge(DownloadPermissionDescriptor other) {
-        if (other.name != null) {
-            name = other.name;
-        }
-        if (other.script != null) {
-            script = other.script;
-        }
-        if (other.scriptLanguage != null) {
-            scriptLanguage = other.scriptLanguage;
-        }
-    }
-
     @Override
-    public int compareTo(DownloadPermissionDescriptor other) {
-        return name.compareTo(other.name);
+    public Descriptor merge(Descriptor other) {
+        if (other == null || !(other instanceof DownloadPermissionDescriptor)) {
+            return this;
+        }
+        DownloadPermissionDescriptor casted = (DownloadPermissionDescriptor) other;
+        DownloadPermissionDescriptor merged = new DownloadPermissionDescriptor();
+        merged.name = casted.name != null ? casted.name : name;
+        merged.script = casted.script != null ? casted.script : script;
+        merged.scriptLanguage = casted.scriptLanguage != null ? casted.scriptLanguage : scriptLanguage;
+        return merged;
     }
 
 }

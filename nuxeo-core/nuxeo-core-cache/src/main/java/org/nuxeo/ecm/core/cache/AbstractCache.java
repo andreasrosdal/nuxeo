@@ -19,7 +19,6 @@
  */
 package org.nuxeo.ecm.core.cache;
 
-
 /**
  * Abstract class to be extended to provide new cache implementation
  *
@@ -33,7 +32,7 @@ public abstract class AbstractCache implements CacheManagement {
 
     protected AbstractCache(CacheDescriptor desc) {
         name = desc.name;
-        ttl = desc.getTTL();
+        ttl = desc.ttl.longValue();
     }
 
     @Override

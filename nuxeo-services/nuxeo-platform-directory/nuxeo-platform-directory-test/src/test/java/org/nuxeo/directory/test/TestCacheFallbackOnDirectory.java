@@ -74,7 +74,7 @@ public class TestCacheFallbackOnDirectory {
             assertEquals("cache-" + dir.getName(), cache.getEntryCache().getName());
 
             CacheDescriptor desc = ((CacheServiceImpl) cacheService).getCacheDescriptor("cache-" + dir.getName());
-            assertEquals(5L, desc.getTTL());
+            assertEquals(5L, desc.ttl.longValue());
             assertEquals(100L, Long.parseLong(desc.options.get(OPTION_MAX_SIZE)));
 
             assertNotNull(CacheFeature.unwrapImpl(InMemoryCacheImpl.class, cache.getEntryCache()));
@@ -82,7 +82,7 @@ public class TestCacheFallbackOnDirectory {
             assertEquals("cacheWithoutReference-" + dir.getName(), cache.getEntryCacheWithoutReferences().getName());
 
             desc = ((CacheServiceImpl) cacheService).getCacheDescriptor("cacheWithoutReference-" + dir.getName());
-            assertEquals(5L, desc.getTTL());
+            assertEquals(5L, desc.ttl.longValue());
             assertEquals(100L, Long.parseLong(desc.options.get(OPTION_MAX_SIZE)));
 
             MetricRegistry metrics = SharedMetricRegistries.getOrCreate(MetricsService.class.getName());
