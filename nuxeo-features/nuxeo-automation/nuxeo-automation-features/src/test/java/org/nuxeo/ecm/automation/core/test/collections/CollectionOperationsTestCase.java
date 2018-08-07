@@ -46,7 +46,6 @@ import org.nuxeo.runtime.test.runner.FeaturesRunner;
 @Deploy("org.nuxeo.ecm.platform.userworkspace.core")
 @Deploy("org.nuxeo.ecm.platform.userworkspace.types")
 @Deploy("org.nuxeo.ecm.platform.web.common")
-@Deploy("org.nuxeo.ecm.platform.tag")
 public class CollectionOperationsTestCase {
 
     protected static final String TEST_FILE_NAME = "testFile";
