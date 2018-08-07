@@ -16,7 +16,7 @@
  * Contributors:
  *     <a href="mailto:glefevre@nuxeo.com">Gildas</a>
  */
-package org.nuxeo.ecm.collections.core.test.operations;
+package org.nuxeo.ecm.automation.core.test.collections;
 
 import java.util.ArrayList;
 import java.util.List;
